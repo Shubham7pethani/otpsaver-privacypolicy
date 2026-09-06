@@ -15,17 +15,26 @@
             padding: 24px;
         }
         h1 { color: #FFFFFF; font-size: 26px; margin-bottom: 8px; margin-top: 0; font-weight: 700;}
-        h2 { color: #FFFFFF; font-size: 18px; margin-top: 32px; border-bottom: 2px solid #14F195; padding-bottom: 8px; font-weight: 600;}
+        h2 { color: #FFFFFF; font-size: 18px; margin-top: 28px; border-bottom: 2px solid #14F195; padding-bottom: 8px; font-weight: 600;}
+        h3 { color: #14F195; font-size: 16px; margin-top: 20px; font-weight: 600; }
         p, li { font-size: 15px; color: #BBBBBB; }
         strong { color: #FFFFFF; }
         ul { margin-top: 8px; padding-left: 20px; }
         li { margin-bottom: 8px; }
-        .last-updated { color: #888888; font-size: 13px; margin-bottom: 32px; font-weight: 500;}
+        .last-updated { color: #888888; font-size: 13px; margin-bottom: 24px; font-weight: 500;}
+        .highlight-box {
+            background: rgba(20, 241, 149, 0.08);
+            border-left: 4px solid #14F195;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .highlight-box p { margin: 0; color: #E0E0E0; font-weight: 500; }
         .contact-info { 
             background: #111111; 
             padding: 16px; 
             border-radius: 12px; 
-            margin-top: 32px; 
+            margin-top: 28px; 
             border-left: 4px solid #14F195; 
         }
         .contact-info p { margin-bottom: 4px; margin-top: 4px; }
@@ -34,36 +43,64 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <div class="last-updated">Last Updated: April 15, 2026</div>
+    <div class="last-updated">Last Updated: September 6, 2026</div>
 
-    <p>Orbit Labs Tech ("we", "our", or "us") respects your privacy and is committed to protecting it. This Privacy Policy explains our practices regarding the collection, use, and disclosure of information when you use the <strong>OTP Saver - Auto OTP Manager</strong> mobile application (the "App").</p>
+    <p><strong>SholoTech</strong> ("we", "our", or "us") respects your privacy and is dedicated to protecting your personal data. This Privacy Policy explains our data practices for the <strong>OTP Saver - Auto OTP Manager</strong> mobile application (the "App").</p>
 
-    <p><strong>Our core principle: Your data never leaves your device. We do not collect, transmit, or store your personal data on any external servers.</strong></p>
+    <div class="highlight-box">
+        <p><strong>Our Core Privacy Commitment:</strong> Your data never leaves your device. OTP Saver operates 100% locally and offline. We do not collect, track, transmit, or sell your personal messages, OTPs, or device information to any external server.</p>
+    </div>
 
-    <h2>1. Data We Access and Why</h2>
-    <p>To provide its core functionality of automatically detecting, saving, and managing One-Time Passwords (OTPs), the App requires specific device permissions:</p>
+    <h2>1. Features, Permissions, and Why We Need Them</h2>
+    <p>To provide automated OTP detection, organization, and background reliability, the App utilizes specific Android permissions and features with strict user transparency:</p>
+
+    <h3>A. SMS Auto-Detection (RECEIVE_SMS, READ_SMS)</h3>
+    <p>The App uses SMS broadcast listening strictly to detect incoming verification codes (One-Time Passwords). When an SMS arrives, our smart on-device algorithm extracts the OTP digits and sender name. The raw SMS content is parsed locally on your device and is never uploaded anywhere.</p>
+
+    <h3>B. Multi-App OTP Detection (Notification Listener Service)</h3>
+    <p>The App offers optional multi-app OTP detection via Android's <code>NotificationListenerService</code>. This enables saving OTPs delivered through notification alerts from services like WhatsApp, delivery apps, or banking platforms.</p>
     <ul>
-        <li><strong>SMS Permissions (RECEIVE_SMS, READ_SMS):</strong> The App uses these permissions strictly to listen for incoming SMS messages containing OTPs. The App processes these messages entirely locally on your device to extract the password and the sender's name.</li>
-        <li><strong>Notification Permissions (POST_NOTIFICATIONS):</strong> Used to alert you instantly when a new OTP originates from an SMS message, allowing you to copy it directly from your notification panel.</li>
+        <li><strong>Strict Scope:</strong> We only process notifications from apps you specifically choose in the "Monitored Apps" settings.</li>
+        <li><strong>No Chat Reading:</strong> We only parse OTP verification codes. Personal conversations, contacts, or non-OTP notifications are immediately discarded.</li>
+        <li><strong>Zero Transmission:</strong> Notification data is processed in-memory locally on your device.</li>
     </ul>
 
-    <h2>2. Local Storage Only</h2>
-    <p>All extracted OTPs and associated metadata (such as sender name and timestamp) are stored securely in a local database entirely on your device. We do not use cloud synchronization, analytics trackers, or external databases. If you uninstall the app or clear its data, all saved OTPs are permanently deleted.</p>
+    <h3>C. Monitored Apps Selection (Installed Apps Query)</h3>
+    <p>The App queries installed applications solely to display a selection list in "Monitored Apps", allowing you to toggle which apps OTP Saver is allowed to monitor. Your installed application list is processed locally on your phone and is never saved, uploaded, or transmitted to any server.</p>
 
-    <h2>3. No Data Sharing</h2>
-    <p>Because the App operates 100% offline and does not connect to the internet, it is technically impossible for us to share, sell, or transmit your SMS data, OTPs, or personal information to any third party.</p>
+    <h3>D. Background Battery Protection (REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)</h3>
+    <p>The App requests an exemption from aggressive OEM battery optimization solely to ensure background delivery of critical OTPs. This prevents background task killers from stopping the detection service when your screen is locked or in deep sleep mode.</p>
+
+    <h3>E. Instant Alerts & Actions (POST_NOTIFICATIONS)</h3>
+    <p>Used to provide instant heads-up alerts whenever an OTP is saved, complete with convenient "Copy OTP" and "Share" action buttons directly in your notification shade.</p>
+
+    <h2>2. Local Storage, Backup & Complete User Control</h2>
+    <ul>
+        <li><strong>On-Device Database:</strong> All saved OTPs, timestamps, and sender names are stored in a private local SQLite/Room database on your device.</li>
+        <li><strong>Export Backup:</strong> You can export your saved OTPs into a local text backup file using Android's secure Storage Access Framework.</li>
+        <li><strong>Total Control:</strong> You can delete any individual OTP (with instant Undo), use Auto-Delete to purge expired codes automatically, or tap "Clear All OTPs" to permanently erase all saved data at any time.</li>
+        <li><strong>Uninstallation:</strong> Uninstalling the App or clearing app data permanently removes all stored OTPs from your device.</li>
+    </ul>
+
+    <h2>3. No Data Sharing, Tracking, or Advertising</h2>
+    <p>Because the App operates 100% offline with no external network communication for user data:</p>
+    <ul>
+        <li>We do not sell, rent, trade, or share your data with any third party.</li>
+        <li>We do not include third-party tracking SDKs, analytics libraries, or advertising networks.</li>
+        <li>No user profiling, behavioral tracking, or fingerprinting is conducted.</li>
+    </ul>
 
     <h2>4. Children's Privacy</h2>
-    <p>Our App does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children. Because we collect no data at all, no children's data is ever transmitted from the device.</p>
+    <p>Our App does not knowingly collect or solicit any personal information from children under the age of 13. Since no personal data is collected or transmitted, the App fully complies with the Children’s Online Privacy Protection Act (COPPA).</p>
 
     <h2>5. Changes to This Privacy Policy</h2>
-    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the top.</p>
+    <p>We may update this Privacy Policy from time to time to reflect app updates or regulatory changes. Any modifications will be updated directly within this page with a revised "Last Updated" date.</p>
 
     <h2>6. Contact Us</h2>
     <div class="contact-info">
-        <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:</p>
-        <p><strong>Developer:</strong> Orbit Labs Tech</p>
-        <p><strong>Email:</strong> <i>support@orbitlabstech.com</i></p>
+        <p>If you have any questions, suggestions, or concerns regarding this Privacy Policy or your data, please contact us at:</p>
+        <p><strong>Developer:</strong> SholoTech</p>
+        <p><strong>Email:</strong> <i>official.sholotech@gmail.com</i></p>
     </div>
 
 </body>
