@@ -43,7 +43,7 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <div class="last-updated">Last Updated: September 6, 2026</div>
+    <div class="last-updated">Last Updated: October 1, 2026</div>
 
     <p><strong>SholoTech</strong> ("we", "our", or "us") respects your privacy and is dedicated to protecting your personal data. This Privacy Policy explains our data practices for the <strong>OTP Saver - Auto OTP Manager</strong> mobile application (the "App").</p>
 
@@ -54,24 +54,21 @@
     <h2>1. Features, Permissions, and Why We Need Them</h2>
     <p>To provide automated OTP detection, organization, and background reliability, the App utilizes specific Android permissions and features with strict user transparency:</p>
 
-    <h3>A. SMS Auto-Detection (RECEIVE_SMS, READ_SMS)</h3>
-    <p>The App uses SMS broadcast listening strictly to detect incoming verification codes (One-Time Passwords). When an SMS arrives, our smart on-device algorithm extracts the OTP digits and sender name. The raw SMS content is parsed locally on your device and is never uploaded anywhere.</p>
-
-    <h3>B. Multi-App OTP Detection (Notification Listener Service)</h3>
-    <p>The App offers optional multi-app OTP detection via Android's <code>NotificationListenerService</code>. This enables saving OTPs delivered through notification alerts from services like WhatsApp, delivery apps, or banking platforms.</p>
+    <h3>A. Real-Time OTP Detection (Notification Listener Service)</h3>
+    <p>OTP Saver detects incoming verification codes (One-Time Passwords) strictly through Android's secure Notification Listener Service when notifications arrive from SMS messaging apps (such as Google Messages, Samsung Messages), WhatsApp, and banking applications. The App operates 100% privately on-device, does NOT read your personal SMS inbox directly, and does not require invasive SMS permissions.</p>
     <ul>
-        <li><strong>Strict Scope:</strong> We only process notifications from apps you specifically choose in the "Monitored Apps" settings.</li>
-        <li><strong>No Chat Reading:</strong> We only parse OTP verification codes. Personal conversations, contacts, or non-OTP notifications are immediately discarded.</li>
-        <li><strong>Zero Transmission:</strong> Notification data is processed in-memory locally on your device.</li>
+        <li><strong>Strict Scope:</strong> We only process notifications from recognized messaging and authentication sources or apps you specifically enable.</li>
+        <li><strong>No Chat Reading:</strong> We only extract verification codes (OTPs). Personal conversations, contacts, or non-OTP notifications are immediately ignored.</li>
+        <li><strong>Zero Transmission:</strong> Notification data is processed in-memory locally on your device and is never uploaded anywhere.</li>
     </ul>
 
-    <h3>C. Monitored Apps Selection (Installed Apps Query)</h3>
+    <h3>B. Monitored Apps Selection (Installed Apps Query)</h3>
     <p>The App queries installed applications solely to display a selection list in "Monitored Apps", allowing you to toggle which apps OTP Saver is allowed to monitor. Your installed application list is processed locally on your phone and is never saved, uploaded, or transmitted to any server.</p>
 
-    <h3>D. Background Battery Protection (REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)</h3>
+    <h3>C. Background Battery Protection (REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)</h3>
     <p>The App requests an exemption from aggressive OEM battery optimization solely to ensure background delivery of critical OTPs. This prevents background task killers from stopping the detection service when your screen is locked or in deep sleep mode.</p>
 
-    <h3>E. Instant Alerts & Actions (POST_NOTIFICATIONS)</h3>
+    <h3>D. Instant Alerts & Actions (POST_NOTIFICATIONS)</h3>
     <p>Used to provide instant heads-up alerts whenever an OTP is saved, complete with convenient "Copy OTP" and "Share" action buttons directly in your notification shade.</p>
 
     <h2>2. Local Storage, Backup & Complete User Control</h2>
